@@ -18,6 +18,24 @@
 
         </div>
 
+        <div class="mb-3">
+
+            <label class="form-label" for="type">Inserisci il type</label>
+            <select class="form-control {{$errors->has('type_id') ? 'is-invalid' : '' }} " name="type_id" id="type">
+                @foreach($types as $type)
+                <option value="{{$type->id}}" {{ old('type_id',$project->type_id) == $type->id ? 'selected' : '' }} >{{$type->name}}</option>
+                @endforeach
+            </select>
+            @if($errors->has('type_id'))
+            <div class="alert alert-danger mt-3">
+                @foreach ($errors->get('type_id') as $error)
+                {{$error}}
+                @endforeach
+            </div>
+            @endif
+
+        </div>
+
 
 
 

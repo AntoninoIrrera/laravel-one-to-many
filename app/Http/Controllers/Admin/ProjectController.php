@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -17,6 +18,7 @@ class ProjectController extends Controller
             'relase_date' => 'required|date',
             'image' => 'max:300|image',
             'description' => '',
+            'type_id' => 'required|exists:types,id'
         ];
     protected $messaggiValidazione = [
             'title.required' => 'il campo è obbligatorio.',
@@ -25,7 +27,9 @@ class ProjectController extends Controller
             'relase_date.required' => 'il campo è obbligatorio.',
             'relase_date.date' => 'il campo deve contenere una data valida.',
             'image.image' => 'inserire un immagine valida.',
-            'image.max' => "l'immagine inserita e troppo grande, deve pesare massimo 300kb."
+            'image.max' => "l'immagine inserita e troppo grande, deve pesare massimo 300kb.",
+            'type_id.required' => 'il campo è obbligatorio',
+            'type_id.exists' => 'il campo selezionato non esiste'
         ];
 
 
@@ -51,8 +55,9 @@ class ProjectController extends Controller
     public function create()
     {
         $project = new Project();
+        $types = Type::all();
 
-        return view('admin.create', compact('project'));
+        return view('admin.create', compact('project', 'types'));
     }
 
     /**
@@ -65,6 +70,7 @@ class ProjectController extends Controller
     {
         $data = $request->validate($this->regoleValidazione,$this->messaggiValidazione);
        
+
         if (isset($data['image'])) {
             $data['image'] = Storage::put('img',$data['image']);
         }
@@ -100,8 +106,9 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         // $project = Project::findOrFail($id);
+        $types = Type::all();
 
-        return view('admin.edit', compact('project'));
+        return view('admin.edit', compact('project','types'));
     }
 
     /**

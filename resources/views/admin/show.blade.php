@@ -9,8 +9,9 @@
     </div>
     @endif
     <div class="card mt-3">
-        <div class="card-header text-center">
-            Featured
+        <div class="card-header text-center" style="color: {{ $project->type->color }}">
+            <h1>{{$project->type->name}}</h1>
+            <img src="{{$project->type->image}}" class="img-fluid w-25" alt="">
         </div>
         @if (isset($project->image))
         <img src="{{asset('storage/' . $project->image)}}" class="card-img-top w-25 mt-3 align-self-center" alt="immagine">
