@@ -37,11 +37,8 @@
                 <td>
                     <a href="{{route('admin.type.show',$type['id'])}}" class="btn btn-primary"><i class="fa-solid fa-eye"></i></a>
                     <a href="{{route('admin.type.edit',$type['id'])}}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                    <form class="d-inline-block double-confirm" action="#" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
-                    </form>
+                    
+                    <button class="btn btn-danger"><i class="fa-solid fa-trash-can"></i></button>
                 </td>
             </tr>
             @endforeach
