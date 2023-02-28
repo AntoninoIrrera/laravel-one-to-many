@@ -28,8 +28,8 @@ class ProjectController extends Controller
             'relase_date.date' => 'il campo deve contenere una data valida.',
             'image.image' => 'inserire un immagine valida.',
             'image.max' => "l'immagine inserita e troppo grande, deve pesare massimo 300kb.",
-            'type_id.required' => 'il campo è obbligatorio',
-            'type_id.exists' => 'il campo selezionato non esiste'
+            'type_id.required' => 'il campo è obbligatorio.',
+            'type_id.exists' => 'il campo selezionato non esiste.'
         ];
 
 
@@ -44,7 +44,7 @@ class ProjectController extends Controller
 
         $projects = Project::paginate(10);
 
-        return view('admin.index',compact('projects'));
+        return view('admin.project.index',compact('projects'));
     }
 
     /**
@@ -57,7 +57,7 @@ class ProjectController extends Controller
         $project = new Project();
         $types = Type::all();
 
-        return view('admin.create', compact('project', 'types'));
+        return view('admin.project.create', compact('project', 'types'));
     }
 
     /**
@@ -93,7 +93,7 @@ class ProjectController extends Controller
 
         // $project = Project::findOrFail($id);
 
-        return view('admin.show',compact('project'));
+        return view('admin.project.show',compact('project'));
 
     }
 
@@ -108,7 +108,7 @@ class ProjectController extends Controller
         // $project = Project::findOrFail($id);
         $types = Type::all();
 
-        return view('admin.edit', compact('project','types'));
+        return view('admin.project.edit', compact('project','types'));
     }
 
     /**
