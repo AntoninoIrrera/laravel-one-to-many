@@ -24,6 +24,8 @@ Route::get('/', function () {
 
 Route::get('/project',[GuestPageController::class, 'index'])->name('guest.index');
 Route::get('/project/{project}', [GuestPageController::class, 'show'])->name('guest.show');
+Route::get('/project/type/{type}', [GuestPageController::class, 'type'])->name('guest.type');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
